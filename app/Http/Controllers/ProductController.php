@@ -55,7 +55,7 @@ class ProductController extends Controller
                 $product->quantity = $quantity;
                 $product->price = $price_item;
                 $product->img_name = $photo_name;
-                $product->image_url_original = config('my_url_product').$photo_name;
+                $product->image_url_original = config('app.my_url_product').$photo_name;
                 $product->status = 0;
              
                 $product->save();
@@ -169,7 +169,7 @@ return Redirect::route('show_item', $product->id);
 if($r->hasFile('photo')){
             unlink('upload/product/'.$product->img_name);
              $product->img_name = $photo_name;
-                $product->image_url_original = config('my_url_product').$photo_name;
+                $product->image_url_original = config('app.my_url_product').$photo_name;
         }
                
 
