@@ -14,6 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//////////apicontroller
+Route::get('api/get_all_products', 'Apicontroller@get_all_products')->name('get_all_products');
+
+
+//////////////////
 Auth::routes();
 
 Route::group(['prefix' => '/', 'middleware' => 'auth'], function() {
