@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 //////////apicontroller
-Route::get('api/get_all_products', 'Apicontroller@get_all_products')->name('get_all_products');
+Route::get('api/get_all_products', 'ApiController@get_all_products')->name('get_all_products');
 
 
 //////////////////
