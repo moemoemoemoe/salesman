@@ -37,9 +37,27 @@ Route::get('manage_items', ['as' => 'manage_items', 'uses' => 'ProductController
 
 Route::get('users_form', ['as' => 'users_form', 'uses' => 'UsersController@users_form']);
 Route::post('users_form', ['as' => 'users_form', 'uses' => 'UsersController@users_form_save']);
-
 Route::get('manage_salesman/{id}', ['as' => 'manage_salesman', 'uses' => 'UsersController@manage_salesman']);
 Route::get('delete_user/{id}', ['as' => 'delete_user', 'uses' => 'UsersController@delete_user']);
+
+
+Route::get('assignstoc', ['as' => 'assignstoc', 'uses' => 'UsersController@assignstoc']);
+Route::post('assignstoc', ['as' => 'assignstoc', 'uses' => 'UsersController@assignstoc_save']);
+Route::get('assignstoc_manage', ['as' => 'assignstoc_manage', 'uses' => 'UsersController@assignstoc_manage']);
+Route::get('show_customers/{id}', ['as' => 'show_customers', 'uses' => 'UsersController@show_customers']);
+Route::get('unlink_customer/{id}/{cus}', ['as' => 'unlink_customer', 'uses' => 'UsersController@unlink_customer']);
+
+
+Route::get('orders', ['as' => 'orders', 'uses' => 'OrdersController@orders']);
+
+
+
+
+
+
+
+
+
 
 
 

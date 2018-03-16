@@ -7,6 +7,7 @@ use App\Deliveryman;
 use App\Customer;
 use App\SaleMan;
 use Redirect;
+use App\SaletoCus;
 use Validator;
 use Session;
 
@@ -48,8 +49,15 @@ class UsersController extends Controller
             {
                 if($type == 1)
                 {
+                    $exist = SaleMan::where('email',$email)->count();
+                    if($exist >0)
+                    {
+ return Redirect::Back()->withErrors('User Attashed of this email address is allready exist!!');
 
-               
+                    }
+
+else
+{
                 $user = new SaleMan();
                 $user->name = $name;
                 $user->phone = $phone;
@@ -59,9 +67,18 @@ class UsersController extends Controller
              
                 $user->save();
             }
+            }
              if($type == 2)
                 {
+ $exist = Deliveryman::where('email',$email)->count();
+                    if($exist >0)
+                    {
+ return Redirect::Back()->withErrors('User Attashed of this email address is allready exist!!');
 
+                    }
+
+else
+{
                
                 $user = new Deliveryman();
                $user->name = $name;
@@ -72,9 +89,16 @@ class UsersController extends Controller
              
                 $user->save();
             }
+        }
+
              if($type == 3)
                 {
+ $exist = Customer::where('email',$email)->count();
+                    if($exist >0)
+                    {
+ return Redirect::Back()->withErrors('User Attashed of this email address is allready exist!!');
 
+                    }
                
                 $user = new Customer();
                $user->name = $name;
@@ -85,11 +109,12 @@ class UsersController extends Controller
              
                 $user->save();
             }
+            }
 
 return Redirect::back()->with('success', 'New User successfuly Created');
 
 
-            }
+            
     }
 
     /**
@@ -166,9 +191,13 @@ else if($type == 2)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function assignstoc()
     {
-        //
+        $salesmans = SaleMan::orderBy('id','DESC')->get();
+        $customers =Customer::orderBy('id','DESC')->where('status',0)->get();
+
+        return view('myusers.assignstoc',compact('salesmans','customers'));
+
     }
 
     /**
@@ -178,9 +207,23 @@ else if($type == 2)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function assignstoc_save(Request $r)
     {
-        //
+        $sale_id = $r->input('sales_id');
+        $customer_ids = $r->input('customer_id');
+        foreach ($customer_ids as $customer_id) {
+          $assign = new SaletoCus();
+          $assign->sale_men_id = $sale_id;
+          $assign->customers_id = $customer_id;
+
+          $assign->save();
+
+          $customers=Customer::findOrFail($customer_id);
+          $customers->status = 1;
+          $customers->save();
+        }
+         return Redirect::back()->with('success', 'New Customers successfuly Assigned');
+
     }
 
     /**
@@ -189,8 +232,41 @@ else if($type == 2)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function assignstoc_manage()
     {
-        //
+        
+        $users = SaleMan::orderBy('id','DESC')->get();
+
+        return view('myusers.assignstoc_manage',compact('users'));
     }
+
+     public function show_customers($id)
+    {
+        $salemans = SaleMan::findOrFail($id);
+
+        
+        $users = SaletoCus::orderBy('id','DESC')->where('sale_men_id',$id)->with('customer')->get();
+    
+
+        return view('myusers.show_customers',compact('users','salemans'));
+    }
+     public function unlink_customer($id ,$cus)
+    {
+       $saletocus_unlink = SaletoCus::findOrFail($id);
+      $saletocus_unlink->delete();
+
+      $customer = Customer::findOrFail($cus);
+      $customer->status = 0;
+      $customer->save();
+
+
+  return Redirect::back()->with('success', 'successfuly Unlinked');
+
+
+    }
+
+    
+
+
+    
 }
