@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
-
+use App\SaleMan;
+use App\Customer;
+use App\SaletoCus;
 class ApiController extends Controller
 {
     /**
@@ -23,9 +25,11 @@ class ApiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function get_all_customers($email)
     {
-        //
+        $saleman = SaleMan::select('id')->where('email',$email)->get();
+       $custumers_attashed = SaletoCus::where('sale_men_id',$saleman[0]->id)->with('customer')->get();
+       return $custumers_attashed;
     }
 
     /**

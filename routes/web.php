@@ -18,6 +18,9 @@ Route::get('/', function () {
 //////////apicontroller
 Route::get('api/get_all_products', 'ApiController@get_all_products')->name('get_all_products');
 
+Route::get('api/get_all_customers/{email}', 'ApiController@get_all_customers')->name('get_all_customers');
+
+
 
 //////////////////
 Auth::routes();
