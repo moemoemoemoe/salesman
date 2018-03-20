@@ -15,8 +15,8 @@ class OrdersController extends Controller
      */
     public function orders()
     {
-
-        $carts = Order::orderBy('inv_nummber','DESC')->where('delivery_date','=',date('d-m-Y'))->with('customer')->with('sales')->paginate(20);
+ 
+        $carts = Order::orderBy('inv_nummber','DESC')->where('delivery_date','=',date('j-n-Y'))->with('customer')->with('sales')->paginate(20);
       //  return $carts;
     return view('order.orders',compact('carts'));
     }
