@@ -29,7 +29,17 @@ class OrdersController extends Controller
     public function view_orders($id)
     {
         $carts = Cart::orderBy('id','DESC')->where('inv_nummber',$id)->with('products')->get();
-       return view('order.order_detail',compact('carts'));
+        $total_inv =0;
+        for($i=0 ;$i<count($carts) ; $i++)
+       {
+$total_inv = $total_inv  + ($carts[$i]->qty * $carts[$i]->products->price);
+
+       }
+       // return $total_inv;
+
+
+
+       return view('order.order_detail',compact('carts','total_inv'));
     }
 
     /**
