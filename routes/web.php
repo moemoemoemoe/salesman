@@ -20,6 +20,9 @@ Route::get('api/get_all_products', 'ApiController@get_all_products')->name('get_
 
 Route::get('api/get_all_customers/{email}', 'ApiController@get_all_customers')->name('get_all_customers');
 
+Route::get('api/get_all_Offers/', 'ApiController@get_all_Offers')->name('get_all_Offers');
+
+
 
 
 //////////////////

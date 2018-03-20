@@ -7,6 +7,7 @@ use App\Product;
 use App\SaleMan;
 use App\Customer;
 use App\SaletoCus;
+use App\Offer;
 class ApiController extends Controller
 {
     /**
@@ -38,9 +39,12 @@ class ApiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function get_all_Offers()
     {
-        //
+        $offers = Offer::select('id','image_url_original')->orderBy('id','DESC')->where('status',1)->get();
+
+        return '{
+  "offers":'.$offers.'}';
     }
 
     /**
