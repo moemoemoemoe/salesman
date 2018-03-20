@@ -109,7 +109,7 @@
             <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-circle-o"></i> Widgets</a></li> -->
           </ul>
         </li>
-        <li><a class="app-menu__item" href="{{route('orders')}}"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Orders</span></a></li>
+        <li><a class="app-menu__item" href="{{route('offers')}}"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Manage Offers</span></a></li>
 
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Users</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">

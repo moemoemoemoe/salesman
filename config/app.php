@@ -54,6 +54,8 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
     'my_url_product' => env('MY_URL_PRODUCT', 'http://salesman.arcazur.com/upload/product/'),
+        'my_url_offer' => env('MY_URL_OFFER', 'http://salesman.arcazur.com/upload/offer/'),
+
 
     /*
     |--------------------------------------------------------------------------

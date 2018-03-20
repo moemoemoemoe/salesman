@@ -51,6 +51,15 @@ Route::get('show_customers/{id}', ['as' => 'show_customers', 'uses' => 'UsersCon
 Route::get('unlink_customer/{id}/{cus}', ['as' => 'unlink_customer', 'uses' => 'UsersController@unlink_customer']);
 
 
+
+Route::get('offers', ['as' => 'offers', 'uses' => 'OffersController@offers_index']);
+Route::post('offers', ['as' => 'offers', 'uses' => 'OffersController@offers_index_save']);
+
+Route::get('manage_offers', ['as' => 'manage_offers', 'uses' => 'OffersController@manage_offers']);
+Route::get('delete_offer/{id}', ['as' => 'delete_offer', 'uses' => 'OffersController@delete_offer']);
+
+
+
 Route::get('orders', ['as' => 'orders', 'uses' => 'OrdersController@orders']);
 
 
