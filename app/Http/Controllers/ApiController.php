@@ -8,6 +8,7 @@ use App\SaleMan;
 use App\Customer;
 use App\SaletoCus;
 use App\Offer;
+use App\Order;
 class ApiController extends Controller
 {
     /**
@@ -53,9 +54,12 @@ class ApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function get_invoices($email)
     {
-        //
+        $sales = SaleMan::select('id')->where('email',$email)->get();
+        $orders = Order::where('customer_id',$sales[0]->id)->where('delivery_date','=',date('j-n-Y'))->get();
+    return $orders;
+
     }
 
     /**
