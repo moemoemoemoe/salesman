@@ -41,7 +41,7 @@ class ApiController extends Controller
      */
     public function get_all_Offers()
     {
-        $offers = Offer::select('id','image_url_original')->orderBy('id','DESC')->where('status',1)->get();
+        $offers = Offer::select('id','image_url_original')->orderBy('id','DESC')->where('status',0)->get();
 
         return '{
   "offers":'.$offers.'}';
