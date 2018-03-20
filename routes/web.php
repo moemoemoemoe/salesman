@@ -61,6 +61,10 @@ Route::get('delete_offer/{id}', ['as' => 'delete_offer', 'uses' => 'OffersContro
 
 
 Route::get('orders', ['as' => 'orders', 'uses' => 'OrdersController@orders']);
+Route::get('view_orders/{id}', ['as' => 'view_orders', 'uses' => 'OrdersController@view_orders']);
+
+
+
 
 
 

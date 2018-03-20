@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Order;
+use paginate;
+use App\Cart;
 class OrdersController extends Controller
 {
     /**
@@ -11,9 +13,12 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function orders()
     {
-        //
+
+        $carts = Order::orderBy('inv_nummber','DESC')->with('customer')->with('sales')->paginate(20);
+      //  return $carts;
+    return view('order.orders',compact('carts'));
     }
 
     /**
@@ -21,9 +26,10 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function view_orders($id)
     {
-        //
+        $carts = Cart::orderBy('id','DESC')->where('inv_nummber',$id)->with('products')->get();
+       return view('order.order_detail',compact('carts'));
     }
 
     /**
