@@ -57,7 +57,8 @@ class ApiController extends Controller
     public function get_invoices($email)
     {
         $sales = SaleMan::select('id')->where('email',$email)->get();
-        $orders = Order::where('customer_id',$sales[0]->id)->where('delivery_date','=',date('j-n-Y'))->get();
+
+        $orders = Order::where('sale_id',$sales[0]->id)->where('delivery_date','=',date('j-n-Y'))->get();
     return $orders;
 
     }
