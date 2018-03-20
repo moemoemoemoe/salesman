@@ -58,7 +58,7 @@ class ApiController extends Controller
     {
         $sales = SaleMan::select('id')->where('email',$email)->get();
 
-        $orders = Order::where('sale_id',$sales[0]->id)->where('delivery_date','=',date('j-n-Y'))->get();
+        $orders = Order::where('sale_id',$sales[0]->id)->with('customer')->where('delivery_date','=',date('j-n-Y'))->get();
     return $orders;
 
     }
@@ -69,9 +69,11 @@ class ApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function get_customers($email)
     {
-        //
+        $sales = SaleMan::select('id')->where('email',$email)->get();
+        $customer = SaletoCus::orderBy('id','DESC')->where('sale_men_id',$sales[0]->id)->with('customer')->get();
+        return $customer;
     }
 
     /**
