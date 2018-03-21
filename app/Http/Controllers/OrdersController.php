@@ -37,6 +37,8 @@ $total_inv = $total_inv  + ($carts[$i]->qty * $carts[$i]->products->price);
        }
 
         $carts_offers = Cart::orderBy('id','DESC')->where('inv_nummber',$id)->where('type',1)->with('offers')->get();
+         return $carts_offers;
+
         $total_inv_offer =0;
         for($j=0 ;$j<count($carts_offers) ; $j++)
        {
