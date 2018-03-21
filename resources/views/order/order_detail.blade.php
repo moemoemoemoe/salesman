@@ -12,7 +12,10 @@
         </ul>
       </div>
  <div class="row">
-      <h4 style="color: #009688;font-weight: 900;text-align: center;">Total : {{$total_inv}} $</h4>
+      <h4 style="color: #009688;font-weight: 900;text-align: center;">Total :  <?php echo $total_inv + $total_inv_offer."$"; ?>
+
+
+      </h4>
  </div>
 
         <div class="row">
@@ -45,7 +48,33 @@
 
 
     @endforeach
+                                                                               
+@foreach($carts_offers as $cart)
+   
+  
+    <div class="col-md-3">
+                    <h4>{{$cart->offers->title}}</h4>
 
+  <div class="widget-small primary"> <img src="{{asset('upload/offer/'.$cart->offers->img_name)}}" style=" width: 80px;height: 80px" />
+ 
+            <div class="info">
+              <p><b> {{$cart->offers->price}} $ --> {{$cart->qty}} box </b></p>
+             
+                   <p><b><?php echo $cart->offers->price * $cart->qty."$"; ?></b></p>
+
+            </div>
+
+          </div> 
+<!--                      <a href="{!! route('delete_offer', ['id'=>$cart->products->id]) !!}" class="btn btn-danger form-control form-group">Delete</a>
+ --></div>
+      
+          
+          
+     
+  
+
+
+    @endforeach
                
 
    

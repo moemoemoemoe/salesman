@@ -45,11 +45,11 @@ $total_inv = $total_inv  + ($carts[$i]->qty * $carts[$i]->products->price);
 $total_inv_offer = $total_inv_offer  + ($carts_offers[$j]->qty * $carts_offers[$j]->offers->price);
 
        }
-      return $total_inv_offer;
+      // return $total_inv_offer;
 
 
 
-       return view('order.order_detail',compact('carts','total_inv'));
+       return view('order.order_detail',compact('carts','total_inv','carts_offers','total_inv_offer'));
     }
 
     /**
