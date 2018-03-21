@@ -9,6 +9,7 @@ use App\Customer;
 use App\SaletoCus;
 use App\Offer;
 use App\Order;
+use App\Cart;
 class ApiController extends Controller
 {
     /**
@@ -96,8 +97,10 @@ class ApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function view_invoice($id)
     {
+         $carts = Cart::orderBy('id','DESC')->where('inv_nummber',$id)->with('products')->get();
+         return $carts;
         //
     }
 }
