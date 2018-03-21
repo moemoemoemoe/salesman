@@ -83,9 +83,11 @@ class ApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function customer_invoice($id)
     {
-        //
+        $invoices = Order::OrderBy('delivery_date','DESC')->where('customer_id',$id)->limit(10)->get();
+        return $invoices;
+
     }
 
     /**
