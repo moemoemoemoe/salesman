@@ -21,6 +21,10 @@ Route::get('api/get_all_products', 'ApiController@get_all_products')->name('get_
 Route::get('api/get_all_customers/{email}', 'ApiController@get_all_customers')->name('get_all_customers');
 
 Route::get('api/get_all_Offers/', 'ApiController@get_all_Offers')->name('get_all_Offers');
+Route::get('api/spec_offer/{id}', 'ApiController@spec_offer')->name('spec_offer');
+
+
+
 
 Route::get('api/get_invoices/{email}', 'ApiController@get_invoices')->name('get_invoices');
 

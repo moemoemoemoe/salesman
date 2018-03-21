@@ -48,6 +48,13 @@ class ApiController extends Controller
         return '{
   "offers":'.$offers.'}';
     }
+  public function spec_offer($id)
+    {
+        $offers = Offer::orderBy('id','DESC')->where('id',$id)->where('status',0)->get();
+
+        
+  return $offers;
+    }
 
     /**
      * Display the specified resource.
