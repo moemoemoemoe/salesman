@@ -28,14 +28,22 @@ class OrdersController extends Controller
      */
     public function view_orders($id)
     {
-        $carts = Cart::orderBy('id','DESC')->where('inv_nummber',$id)->with('products')->get();
+        $carts = Cart::orderBy('id','DESC')->where('inv_nummber',$id)->where('type',0)->with('products')->get();
         $total_inv =0;
         for($i=0 ;$i<count($carts) ; $i++)
        {
 $total_inv = $total_inv  + ($carts[$i]->qty * $carts[$i]->products->price);
 
        }
-       // return $total_inv;
+
+        $carts_offers = Cart::orderBy('id','DESC')->where('inv_nummber',$id)->where('type',1)->with('offers')->get();
+        $total_inv_offer =0;
+        for($j=0 ;$j<count($carts_offers) ; $j++)
+       {
+$total_inv_offer = $total_inv_offer  + ($carts_offers[$j]->qty * $carts_offers[$j]->offer->price);
+
+       }
+      return $carts_offers;
 
 
 
