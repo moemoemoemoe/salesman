@@ -65,7 +65,6 @@
             </div>
 
           </div> 
-<!--                      <a href="{!! route('delete_offer', ['id'=>$cart->products->id]) !!}" class="btn btn-danger form-control form-group">Delete</a>
  --></div>
       
           
