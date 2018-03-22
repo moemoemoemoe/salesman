@@ -117,6 +117,6 @@ class ApiController extends Controller
          $orders = Order::orderBy('id','DESC')->where('sale_id',$sales[0]->id)->with('customer')->limit(20)->get();
          return $orders;
         //
-    }
+    
 }
 }
