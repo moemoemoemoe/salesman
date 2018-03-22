@@ -110,4 +110,13 @@ class ApiController extends Controller
          return $carts;
         //
     }
+
+    public function all_orders_sales($email)
+    {
+        $sales = SaleMan::select('id')->where('email',$email)->get();
+         $orders = Order::orderBy('id','DESC')->where('sale_id',$sales[0]->id)->with('customer')->limit(20)->get();
+         return $orders;
+        //
+    }
+}
 }
