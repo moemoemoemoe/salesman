@@ -106,7 +106,7 @@ class ApiController extends Controller
      */
     public function view_invoice($id)
     {
-         $carts = Cart::orderBy('id','DESC')->where('inv_nummber',$id)->with('products')->get();
+         $carts = Cart::orderBy('id','DESC')->where('inv_nummber',$id)->with('products')->with('offers')->get();
          return $carts;
         //
     }
