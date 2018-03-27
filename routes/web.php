@@ -38,7 +38,7 @@ Route::get('api/all_payments/{inv}', 'ApiController@payments')->name('payments')
 
 
 
-
+Route::get('api/pay_invoice/{inv}/{amount}/{total}','ApiController@pay_invoice')->name('pay_invoice');
 
 
 

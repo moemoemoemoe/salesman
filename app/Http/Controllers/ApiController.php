@@ -127,4 +127,91 @@ $payments = Payment::where('inv_id',$inv)->get();
 return $payments;
 }
 
+public function pay_invoice($inv,$amount,$total)
+{
+
+    $payment = Payment::where('inv_id',$inv)->get();
+    if(count($payment == 0))
+    {
+        $add_payment = new Payment();
+        $add_payment->inv_id = $inv;
+        $add_payment->amount = $amount;
+        $add_payment->total =  $total;
+        $add_payment->rest =  $total - $amount;
+        $add_payment->the_date = date('j-n-Y');
+
+try {
+    $add_payment->save();
+    return "[{".'"status":'.'"Uploaded Successfully"'."}]"; 
+    
+} catch (Exception $e) {
+
+    return "[{".'"status":'.'"Error on Save please Try again"'."}]";
+}
+
+
+
+    }
+    else
+    {
+
+    $payment_old = Payment::where('inv_id',$inv)->orderBy('id','DESC')->limit(1)->get();
+if($payment_old[0]->rest - $amount == 0)
+{
+
+    $order=Order::where('inv_nummber',$inv)->get();
+    $order_stat = Order::findOrFail($order[0]->id);
+    $order_stat->status = 4;
+    $order_stat->save();
+
+        $add_payment = new Payment();
+        $add_payment->inv_id = $inv;
+        $add_payment->amount = $amount;
+        $add_payment->total =  $total;
+        $add_payment->rest =  $payment_old[0]->rest - $amount;
+        $add_payment->the_date = date('j-n-Y');
+
+try {
+    $add_payment->save();
+    return "[{".'"status":'.'"Uploaded Successfully"'."}]"; 
+    
+} catch (Exception $e) {
+
+    return "[{".'"status":'.'"Error on Save please Try again"'."}]";
+}
+
+
+}
+elseif ($payment_old[0]->rest - $amount < 0) {
+        return "[{".'"status":'.'"Please check the invoice report,the paymen is Bigger than rest!! "'."}]"; 
+
+}
+else
+{
+
+
+        $add_payment = new Payment();
+        $add_payment->inv_id = $inv;
+        $add_payment->amount = $amount;
+        $add_payment->total =  $total;
+        $add_payment->rest =  $payment_old[0]->rest - $amount;
+        $add_payment->the_date = date('j-n-Y');
+
+try {
+    $add_payment->save();
+    return "[{".'"status":'.'"Uploaded Successfully"'."}]"; 
+    
+} catch (Exception $e) {
+
+    return "[{".'"status":'.'"Error on Save please Try again"'."}]";
+}
+}
+
+
+    
+
+
+    }
+}
+
 }
