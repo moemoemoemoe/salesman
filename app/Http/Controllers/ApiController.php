@@ -131,7 +131,7 @@ public function pay_invoice($inv,$amount,$total)
 {
 
     $payment = Payment::where('inv_id',$inv)->get();
-    if(count($payment == 0))
+    if(count($payment) == 0)
     {
         $add_payment = new Payment();
         $add_payment->inv_id = $inv;
