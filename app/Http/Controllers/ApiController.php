@@ -213,5 +213,49 @@ try {
 
     }
 }
+public function save_new_customer($myemail,$name,$address,$email,$phone)
+{
+
+    $sales_id = SaleMan::where('email',$myemail)->get();
+
+    $saleman_id = $sales_id[0]->id;
+
+    $customer = Customer::where('email',$email)->get();
+    if(count($customer) > 0)
+    {
+
+ return "[{".'"status":'.'"This email is associated to onther Customer"'."}]"; 
+
+    }
+    else
+    {
+        $new_customer = new Customer();
+        $new_customer->name = $name;
+         $new_customer->phone = $phone;
+          $new_customer->email = $email;
+           $new_customer->address = $address;
+            $new_customer->status = 1;
+
+  $new_customer->save();
+
+  $sale_to_customer  = new SaletoCus();
+$sale_to_customer->sale_men_id =$saleman_id;
+$sale_to_customer->customers_id = $new_customer->id;
+try {
+    $sale_to_customer->save();
+    return "[{".'"status":'.'"Uploaded Successfully"'."}]"; 
+    
+} catch (Exception $e) {
+
+    return "[{".'"status":'.'"Error on Save please Try again"'."}]";
+}
+
+
+    }
+
+
+
+
+}
 
 }
