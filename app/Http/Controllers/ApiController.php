@@ -183,7 +183,7 @@ try {
 
 }
 elseif ($payment_old[0]->rest - $amount < 0) {
-        return "[{".'"status":'.'"Please check the invoice report,the paymen is Bigger than rest!! "'."}]"; 
+        return "[{".'"status":'.'"Please check the invoice report,the payment is Bigger than rest!! "'."}]"; 
 
 }
 else
