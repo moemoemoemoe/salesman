@@ -9,6 +9,7 @@ use App\Customer;
 use App\SaletoCus;
 use App\Offer;
 use App\Order;
+use App\Payment;
 use App\Cart;
 class ApiController extends Controller
 {
@@ -119,4 +120,11 @@ class ApiController extends Controller
         //
     
 }
+public function payments($inv)
+{
+
+$payments = Payment::where('inv_id',$inv)->get();
+return $payments;
+}
+
 }
